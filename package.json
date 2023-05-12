@@ -3,9 +3,16 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "nx serve",
-    "build": "nx build",
-    "test": "nx test"
+    "nx": "node --max_old_space_size=8000 ./node_modules/@nrwl/cli/bin/nx",
+    "start": "npm run nx -- serve",
+    "build": "npm run nx -- build",
+    "test": "npm run nx -- test",
+    "build:server": "npm run nx -- run nicedayv2:server",
+    "build:ssr": "npm run build && npm run build:server",
+    "build:ssr:1": "npm run build && npx nx run nicedayv2:server",
+    "serve:ssr": "node dist/nicedayv2/server/main.js",
+    "serve:ssr:dev": "npm run nx -- run nicedayv2:serve-ssr:development",
+    "serve:ssr:prod": "npm run nx -- run nicedayv2:serve-ssr:production"
   },
   "private": true,
   "dependencies": {
@@ -16,7 +23,9 @@
     "@angular/forms": "~15.1.0",
     "@angular/platform-browser": "~15.1.0",
     "@angular/platform-browser-dynamic": "~15.1.0",
+    "@angular/platform-server": "~15.1.0",
     "@angular/router": "~15.1.0",
+    "@nguniversal/express-engine": "^15.1.0",
     "@nrwl/angular": "15.6.3",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
@@ -30,6 +39,7 @@
     "@angular/cli": "~15.1.0",
     "@angular/compiler-cli": "~15.1.0",
     "@angular/language-service": "~15.1.0",
+    "@nguniversal/builders": "^15.1.0",
     "@nrwl/cypress": "15.6.3",
     "@nrwl/eslint-plugin-nx": "15.6.3",
     "@nrwl/jest": "15.6.3",
